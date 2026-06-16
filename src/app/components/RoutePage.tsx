@@ -81,7 +81,7 @@ function SlideCard({ item, index, total, isActive }: { item: typeof routeA[0]; i
       {/* Bottom info panel */}
       <motion.div
         className="absolute bottom-0 left-0 right-0 px-6 z-10"
-        style={{ paddingBottom: "104px", y: infoY, opacity: infoOpacity }}
+        style={{ paddingBottom: "max(96px, env(safe-area-inset-bottom, 96px))", y: infoY, opacity: infoOpacity }}
       >
         <div className="mb-3">
           <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "36px", fontWeight: 600, color: "#F4F0EA", lineHeight: 1.1, textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
@@ -153,7 +153,7 @@ export function RoutePage({ userType, onNavigate }: RoutePageProps) {
   return (
     <div className="relative w-full h-full overflow-hidden" style={{ background: "#1a1008" }}>
       {/* Top bar */}
-      <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 pt-5 z-20">
+      <div className="absolute top-0 left-0 right-0 flex items-center justify-between z-20" style={{ padding: "max(12px, env(safe-area-inset-top, 12px)) 20px" }}>
         <button onClick={() => onNavigate("home")} className="flex items-center gap-1.5 rounded-full px-3 py-1.5 backdrop-blur-sm transition-all active:scale-95" style={{ background: "rgba(244,240,234,0.12)", border: "1px solid rgba(244,240,234,0.18)" }}>
           <ChevronLeft size={14} color="#F4F0EA" />
           <span style={{ fontFamily: "var(--font-sans)", fontSize: "11px", color: "#F4F0EA", fontWeight: 400 }}>返回</span>
@@ -173,7 +173,7 @@ export function RoutePage({ userType, onNavigate }: RoutePageProps) {
       </div>
 
       {/* Bottom navigation - dots + arrows */}
-      <div className="absolute bottom-0 left-0 right-0 z-20" style={{ paddingBottom: "88px" }}>
+      <div className="absolute bottom-0 left-0 right-0 z-20" style={{ paddingBottom: "max(16px, env(safe-area-inset-bottom, 16px))" }}>
         <div className="flex items-center justify-between px-6">
           {/* Progress dots */}
           <div className="flex items-center gap-2">
@@ -193,24 +193,24 @@ export function RoutePage({ userType, onNavigate }: RoutePageProps) {
           </div>
 
           {/* Arrows */}
-          <div className="flex gap-2.5">
+          <div className="flex gap-3">
             <button onClick={scrollPrev}
-              className="flex items-center justify-center w-9 h-9 rounded-full transition-all duration-300 active:scale-90"
+              className="flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 active:scale-90"
               style={{
                 background: current === 0 ? "rgba(244,240,234,0.05)" : "rgba(244,240,234,0.1)",
                 border: "1px solid rgba(244,240,234,0.15)",
                 opacity: current === 0 ? 0.25 : 1,
               }}>
-              <ChevronLeft size={15} color="#F4F0EA" />
+              <ChevronLeft size={16} color="#F4F0EA" />
             </button>
             <button onClick={scrollNext}
-              className="flex items-center justify-center w-9 h-9 rounded-full transition-all duration-300 active:scale-90"
+              className="flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 active:scale-90"
               style={{
                 background: current === route.length - 1 ? "rgba(168,103,58,0.5)" : "rgba(244,240,234,0.1)",
                 border: "1px solid rgba(244,240,234,0.15)",
                 opacity: current === route.length - 1 ? 0.6 : 1,
               }}>
-              <ChevronRight size={15} color="#F4F0EA" />
+              <ChevronRight size={16} color="#F4F0EA" />
             </button>
           </div>
         </div>

@@ -68,7 +68,7 @@ export function ActivitiesPage() {
       </div>
 
       {/* Book-like carousel */}
-      <div className="relative flex-1" style={{ height: "calc(100% - 180px)", paddingBottom: "120px" }}>
+      <div className="relative flex-1" style={{ height: "calc(100% - 180px)", paddingBottom: "max(120px, env(safe-area-inset-bottom, 120px))" }}>
         <div className="overflow-hidden w-full h-full px-1" ref={emblaRef}>
           <div className="flex h-full">
             {filtered.map((item, i) => (
@@ -97,6 +97,9 @@ export function ActivitiesPage() {
                         <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 600, color: "#3C342C", marginBottom: "2px" }}>{item.name}</h3>
                         <p style={{ fontSize: "9px", color: "#A8673A", letterSpacing: "0.15em" }}>{item.nameEn}</p>
                       </div>
+                      <div className="text-right flex-shrink-0">
+                        <span style={{ fontFamily: "var(--font-inter)", fontSize: "13px", color: "#A8673A", fontWeight: 600 }}>{item.price}</span>
+                      </div>
                     </div>
                     <div className="flex items-center gap-1.5 mt-2">
                       <Clock size={11} color="#7A6E64" /><span style={{ fontSize: "11px", color: "#7A6E64" }}>{item.duration}</span>
@@ -121,7 +124,7 @@ export function ActivitiesPage() {
         </div>
 
         {/* Navigation arrows */}
-        <div className="absolute left-0 right-0 flex items-center justify-between px-4 z-10" style={{ bottom: "72px" }}>
+        <div className="absolute left-0 right-0 flex items-center justify-between z-10" style={{ padding: "0 20px", bottom: "max(72px, env(safe-area-inset-bottom, 72px))" }}>
           <div className="flex items-center gap-1.5">
             {filtered.map((_, i) => (
               <button key={i} onClick={() => emblaApi?.scrollTo(i)}

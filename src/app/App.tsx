@@ -27,17 +27,8 @@ export default function App() {
   const isForward = pageOrder.indexOf(page) >= pageOrder.indexOf(prevPage);
 
   return (
-    <div className="size-full flex items-center justify-center" style={{ background: "#2D2D2D" }}>
-      <div
-        className="relative overflow-hidden flex flex-col"
-        style={{
-          width: "min(390px, 100vw)",
-          height: "min(844px, 100vh)",
-          background: "#F4F0EA",
-          borderRadius: "min(44px, 0px)",
-          boxShadow: "0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)",
-        }}
-      >
+    <div className="w-full min-h-dvh flex flex-col items-center" style={{ background: "#F4F0EA" }}>
+      <div className="w-full max-w-[430px] min-h-dvh flex flex-col">
         <div className="flex-1 relative overflow-hidden">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
