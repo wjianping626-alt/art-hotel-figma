@@ -40,10 +40,10 @@ export function ArtPage() {
 
       {/* Current Exhibitions */}
       <div className="px-4 flex flex-col gap-4 pb-6">
-        <p className="px-2" style={{ fontSize: "10px", color: "#A8673A", letterSpacing: "0.25em", fontWeight: 600, marginBottom: "12px" }}>当前展览</p>
+        <p className="px-2" style={{ fontSize: "10px", color: "#A8673A", letterSpacing: "0.25em", fontWeight: 600 }}>当前展览</p>
         {exhibitions.map((ex, i) => (
           <motion.div key={ex.id} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} className="rounded-3xl overflow-hidden" style={{ background: "#E9E2D8" }}>
-            <div className="relative" style={{ height: "220px" }}>
+            <div className="relative" style={{ height: "200px" }}>
               <img src={img(ex.img)} alt={ex.name} className="w-full h-full object-cover" style={{ filter: "saturate(0.75)" }} />
               <div className="absolute top-3 left-3 rounded-full px-3 py-1" style={{ background: "rgba(244,240,234,0.15)", backdropFilter: "blur(6px)", border: "1px solid rgba(244,240,234,0.25)" }}>
                 <span style={{ fontSize: "10px", color: "#F4F0EA", fontWeight: 500 }}>{ex.type}</span>

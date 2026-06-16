@@ -1,6 +1,7 @@
+import { motion } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { motion, AnimatePresence, useMotionValue, useTransform } from "motion/react";
+import { motion as m, useMotionValue, useTransform } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { img } from "@/lib/img";
 
@@ -47,77 +48,30 @@ function SlideCard({ item, index, total, isActive }: { item: typeof routeA[0]; i
       style={{ x }}
       whileTap={{ cursor: "grabbing" }}
     >
-      {/* Full-bleed image with parallax */}
-      <motion.div
-        className="absolute inset-0"
-        style={{ scale, filter: useTransform(blurActive, (v) => `blur(${v}px)`) }}
-      >
-        <motion.img
-          src={img(item.img)}
-          alt={item.title}
-          className="w-full h-full object-cover"
-          style={{ x: imgX, scale: 1.1 }}
-          draggable={false}
-        />
-      </motion.div>
-
-      {/* Gradient overlay - stronger at bottom for text */}
+      <m.div className="absolute inset-0" style={{ scale, filter: useTransform(blurActive, (v) => `blur(${v}px)`) }}>
+        <m.img src={img(item.img)} alt={item.title} className="w-full h-full object-cover" style={{ x: imgX, scale: 1.1 }} draggable={false} />
+      </m.div>
       <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(10,6,3,0.15) 0%, rgba(10,6,3,0.08) 30%, rgba(10,6,3,0.45) 60%, rgba(10,6,3,0.82) 100%)" }} />
-
-      {/* Top-left accent - minimal */}
       <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 pt-14 z-10">
         <div className="flex items-center gap-2">
-          <motion.div
-            animate={{ width: isActive ? "24px" : "12px" }}
-            className="h-[2px] rounded-full"
-            style={{ background: "#A8673A" }}
-          />
+          <motion.div animate={{ width: isActive ? "24px" : "12px" }} className="h-[2px] rounded-full" style={{ background: "#A8673A" }} />
           <span style={{ fontFamily: "var(--font-inter)", fontSize: "11px", color: "#F4F0EA", fontWeight: 500, letterSpacing: "0.2em", textShadow: "0 1px 6px rgba(0,0,0,0.6)" }}>
             {item.node} / {String(total).padStart(2, "0")}
           </span>
         </div>
       </div>
-
-      {/* Bottom info panel */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 px-6 z-10"
-        style={{ paddingBottom: "max(96px, env(safe-area-inset-bottom, 96px))", y: infoY, opacity: infoOpacity }}
-      >
+      <motion.div className="absolute bottom-0 left-0 right-0 px-6 z-10" style={{ paddingBottom: "104px", y: infoY, opacity: infoOpacity }}>
         <div className="mb-3">
-          <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "36px", fontWeight: 600, color: "#F4F0EA", lineHeight: 1.1, textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
-            {item.title}
-          </h2>
-          <p style={{ fontFamily: "var(--font-inter)", fontSize: "11px", color: "#A8673A", letterSpacing: "0.3em", fontWeight: 400, marginTop: "4px" }}>
-            {item.subtitle}
-          </p>
+          <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "36px", fontWeight: 600, color: "#F4F0EA", lineHeight: 1.1, textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>{item.title}</h2>
+          <p style={{ fontFamily: "var(--font-inter)", fontSize: "11px", color: "#A8673A", letterSpacing: "0.3em", fontWeight: 400, marginTop: "4px" }}>{item.subtitle}</p>
         </div>
-
         <div className="flex items-center gap-3 mb-3">
-          <motion.div
-            animate={{ width: isActive ? "32px" : "16px" }}
-            className="h-[1.5px]"
-            style={{ background: "#A8673A" }}
-          />
-          <span style={{ fontFamily: "var(--font-sans)", fontSize: "10px", color: "rgba(244,240,234,0.45)", letterSpacing: "0.3em", fontWeight: 300 }}>
-            {item.node} · {item.subtitle.toUpperCase()}
-          </span>
+          <motion.div animate={{ width: isActive ? "32px" : "16px" }} className="h-[1.5px]" style={{ background: "#A8673A" }} />
+          <span style={{ fontFamily: "var(--font-sans)", fontSize: "10px", color: "rgba(244,240,234,0.45)", letterSpacing: "0.3em", fontWeight: 300 }}>{item.node} · {item.subtitle.toUpperCase()}</span>
         </div>
-
-        <p style={{ fontFamily: "var(--font-sans)", fontSize: "13px", color: "rgba(244,240,234,0.7)", lineHeight: 1.75, fontWeight: 300, textShadow: "0 1px 4px rgba(0,0,0,0.3)" }}>
-          {item.desc}
-        </p>
+        <p style={{ fontFamily: "var(--font-sans)", fontSize: "13px", color: "rgba(244,240,234,0.7)", lineHeight: 1.75, fontWeight: 300, textShadow: "0 1px 4px rgba(0,0,0,0.3)" }}>{item.desc}</p>
       </motion.div>
-
-      {/* Drag hint glow */}
-      {isActive && (
-        <motion.div
-          className="absolute inset-y-0 left-0 w-1"
-          style={{ background: "linear-gradient(to right, rgba(168,103,58,0.3), transparent)" }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        />
-      )}
+      {isActive && <motion.div className="absolute inset-y-0 left-0 w-1" style={{ background: "linear-gradient(to right, rgba(168,103,58,0.3), transparent)" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} />}
     </motion.div>
   );
 }
@@ -126,18 +80,11 @@ export function RoutePage({ userType, onNavigate }: RoutePageProps) {
   const route = userType === "B" ? routeB : routeA;
   const label = userType === "B" ? "观景流线" : "住宿流线";
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
-    align: "start",
-    containScroll: "trimSnaps",
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: "start", containScroll: "trimSnaps" });
   const [current, setCurrent] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setCurrent(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
+  const onSelect = useCallback(() => { if (!emblaApi) return; setCurrent(emblaApi.selectedScrollSnap()); }, [emblaApi]);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -152,8 +99,7 @@ export function RoutePage({ userType, onNavigate }: RoutePageProps) {
 
   return (
     <div className="relative w-full h-full overflow-hidden" style={{ background: "#1a1008" }}>
-      {/* Top bar */}
-      <div className="absolute top-0 left-0 right-0 flex items-center justify-between z-20" style={{ padding: "max(12px, env(safe-area-inset-top, 12px)) 20px" }}>
+      <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 pt-5 z-20">
         <button onClick={() => onNavigate("home")} className="flex items-center gap-1.5 rounded-full px-3 py-1.5 backdrop-blur-sm transition-all active:scale-95" style={{ background: "rgba(244,240,234,0.12)", border: "1px solid rgba(244,240,234,0.18)" }}>
           <ChevronLeft size={14} color="#F4F0EA" />
           <span style={{ fontFamily: "var(--font-sans)", fontSize: "11px", color: "#F4F0EA", fontWeight: 400 }}>返回</span>
@@ -163,54 +109,31 @@ export function RoutePage({ userType, onNavigate }: RoutePageProps) {
         </div>
       </div>
 
-      {/* Full-screen carousel */}
       <div className="overflow-hidden w-full h-full" ref={emblaRef}>
         <div className="flex h-full" style={{ cursor: isDragging ? "grabbing" : "grab" }}>
-          {route.map((item, i) => (
-            <SlideCard key={i} item={item} index={i} total={route.length} isActive={i === current} />
-          ))}
+          {route.map((item, i) => <SlideCard key={i} item={item} index={i} total={route.length} isActive={i === current} />)}
         </div>
       </div>
 
-      {/* Bottom navigation - dots + arrows */}
-      <div className="absolute bottom-0 left-0 right-0 z-20" style={{ paddingBottom: "max(16px, env(safe-area-inset-bottom, 16px))" }}>
+      <div className="absolute bottom-0 left-0 right-0 z-20" style={{ paddingBottom: "88px" }}>
         <div className="flex items-center justify-between px-6">
-          {/* Progress dots */}
           <div className="flex items-center gap-2">
-            {route.map((_, i) => {
-              const isDotActive = i === current;
-              return (
-                <button key={i} onClick={() => emblaApi?.scrollTo(i)}
-                  className="rounded-full transition-all duration-500"
-                  style={{
-                    width: isDotActive ? "28px" : "5px",
-                    height: "5px",
-                    background: isDotActive ? "#A8673A" : "rgba(244,240,234,0.2)",
-                  }}
-                />
-              );
-            })}
+            {route.map((_, i) => (
+              <button key={i} onClick={() => emblaApi?.scrollTo(i)}
+                className="rounded-full transition-all duration-500"
+                style={{ width: i === current ? "28px" : "5px", height: "5px", background: i === current ? "#A8673A" : "rgba(244,240,234,0.2)" }} />
+            ))}
           </div>
-
-          {/* Arrows */}
-          <div className="flex gap-3">
+          <div className="flex gap-2.5">
             <button onClick={scrollPrev}
-              className="flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 active:scale-90"
-              style={{
-                background: current === 0 ? "rgba(244,240,234,0.05)" : "rgba(244,240,234,0.1)",
-                border: "1px solid rgba(244,240,234,0.15)",
-                opacity: current === 0 ? 0.25 : 1,
-              }}>
-              <ChevronLeft size={16} color="#F4F0EA" />
+              className="flex items-center justify-center w-9 h-9 rounded-full transition-all duration-300 active:scale-90"
+              style={{ background: current === 0 ? "rgba(244,240,234,0.05)" : "rgba(244,240,234,0.1)", border: "1px solid rgba(244,240,234,0.15)", opacity: current === 0 ? 0.25 : 1 }}>
+              <ChevronLeft size={15} color="#F4F0EA" />
             </button>
             <button onClick={scrollNext}
-              className="flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 active:scale-90"
-              style={{
-                background: current === route.length - 1 ? "rgba(168,103,58,0.5)" : "rgba(244,240,234,0.1)",
-                border: "1px solid rgba(244,240,234,0.15)",
-                opacity: current === route.length - 1 ? 0.6 : 1,
-              }}>
-              <ChevronRight size={16} color="#F4F0EA" />
+              className="flex items-center justify-center w-9 h-9 rounded-full transition-all duration-300 active:scale-90"
+              style={{ background: current === route.length - 1 ? "rgba(168,103,58,0.5)" : "rgba(244,240,234,0.1)", border: "1px solid rgba(244,240,234,0.15)", opacity: current === route.length - 1 ? 0.6 : 1 }}>
+              <ChevronRight size={15} color="#F4F0EA" />
             </button>
           </div>
         </div>
