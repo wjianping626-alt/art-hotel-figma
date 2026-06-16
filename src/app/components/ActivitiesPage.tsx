@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { motion, useMotionValue, useTransform } from "motion/react";
 import { Clock, ChevronLeft, ChevronRight } from "lucide-react";
+import { img } from "@/lib/img";
 
 const tags = ["全部", "探索观景", "餐饮享受", "庆祝活动", "康体养生", "休闲娱乐", "艺术展览", "艺术沙龙"];
 
@@ -80,7 +81,7 @@ export function ActivitiesPage() {
                   style={{ background: "#E9E2D8", border: "1px solid rgba(60,52,44,0.08)" }}
                 >
                   <div className="relative" style={{ height: "55%" }}>
-                    <img src={item.img} alt={item.name} className="w-full h-full object-cover" style={{ filter: "saturate(0.82)" }} />
+                    <img src={img(item.img)} alt={item.name} className="w-full h-full object-cover" style={{ filter: "saturate(0.82)" }} />
                     <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(10,6,3,0.65) 100%)" }} />
                     <div className="absolute top-3 left-3 rounded-full px-2.5 py-1" style={{ background: "rgba(168,103,58,0.85)", backdropFilter: "blur(4px)" }}>
                       <span style={{ fontSize: "9px", color: "#F4F0EA", fontWeight: 600, letterSpacing: "0.1em" }}>{item.tag}</span>

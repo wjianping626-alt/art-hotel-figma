@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { motion, AnimatePresence, useMotionValue, useTransform } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { img } from "@/lib/img";
 
 type UserType = "A" | "B" | null;
 
@@ -52,7 +53,7 @@ function SlideCard({ item, index, total, isActive }: { item: typeof routeA[0]; i
         style={{ scale, filter: useTransform(blurActive, (v) => `blur(${v}px)`) }}
       >
         <motion.img
-          src={item.img}
+          src={img(item.img)}
           alt={item.title}
           className="w-full h-full object-cover"
           style={{ x: imgX, scale: 1.1 }}

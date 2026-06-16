@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Calendar, User, Image as ImageIcon } from "lucide-react";
+import { img } from "@/lib/img";
 
 const exhibitions = [
   { id: 1, name: "黄土·呼吸", nameEn: "Loess · Breathe", artist: "张明远", artistEn: "Zhang Mingyuan", period: "2026.05 — 2026.08", type: "装置艺术", desc: "以麻黄梁黄土为材料，探索大地肌理与生命律动之间的内在联系。", img: "/art/earth-sculpture.jpg" },
@@ -22,7 +23,7 @@ export function ArtPage() {
     <div className="w-full h-full overflow-y-auto" style={{ background: "#F4F0EA", fontFamily: "var(--font-sans)" }}>
       {/* Hero */}
       <div className="relative" style={{ height: "280px" }}>
-        <img src="/art/earth-sculpture.jpg" alt="艺术展厅" className="w-full h-full object-cover" style={{ filter: "saturate(0.7) brightness(0.75)" }} />
+        <img src={img("/art/earth-sculpture.jpg")} alt="艺术展厅" className="w-full h-full object-cover" style={{ filter: "saturate(0.7) brightness(0.75)" }} />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(10,6,3,0.3) 0%, rgba(10,6,3,0.7) 100%)" }} />
         <div className="absolute bottom-0 left-0 px-6 pb-8">
           <p style={{ fontSize: "10px", color: "#A8673A", letterSpacing: "0.3em", fontWeight: 500, marginBottom: "8px" }}>ART · 艺术</p>
@@ -43,7 +44,7 @@ export function ArtPage() {
         {exhibitions.map((ex, i) => (
           <motion.div key={ex.id} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} className="rounded-3xl overflow-hidden" style={{ background: "#E9E2D8" }}>
             <div className="relative" style={{ height: "200px" }}>
-              <img src={ex.img} alt={ex.name} className="w-full h-full object-cover" style={{ filter: "saturate(0.75)" }} />
+              <img src={img(ex.img)} alt={ex.name} className="w-full h-full object-cover" style={{ filter: "saturate(0.75)" }} />
               <div className="absolute top-3 left-3 rounded-full px-3 py-1" style={{ background: "rgba(244,240,234,0.15)", backdropFilter: "blur(6px)", border: "1px solid rgba(244,240,234,0.25)" }}>
                 <span style={{ fontSize: "10px", color: "#F4F0EA", fontWeight: 500 }}>{ex.type}</span>
               </div>
@@ -72,7 +73,7 @@ export function ArtPage() {
             <motion.div key={item.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: i * 0.06 }}
               className="rounded-2xl overflow-hidden" style={{ background: "#E9E2D8" }}>
               <div className="relative" style={{ aspectRatio: "4/3" }}>
-                <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
+                <img src={img(item.img)} alt={item.name} className="w-full h-full object-cover" />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(10,6,3,0.5) 100%)" }} />
                 <div className="absolute bottom-2 left-2 right-2">
                   <p style={{ fontFamily: "var(--font-serif)", fontSize: "14px", fontWeight: 600, color: "#F4F0EA" }}>{item.name}</p>

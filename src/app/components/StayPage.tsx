@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 import { Eye, Wind, Star } from "lucide-react";
+import { img } from "@/lib/img";
 
 const rooms = [
   { id: "single", name: "观景单人间", nameEn: "Scenic Single", price: "¥ 680", priceUnit: "/ 晚", tags: ["峡谷景观", "独立卫浴", "免费早餐"], highlights: "麻黄梁黄土峡谷全景，静谧独处，适合独行旅客与艺术创作。", rating: "4.8", size: "28㎡", img: "/room-single.png" },
@@ -29,7 +30,7 @@ export function StayPage() {
               </div>
             )}
             <div className={`relative overflow-hidden ${room.featured ? "mx-3 rounded-2xl" : ""}`} style={{ height: room.featured ? "200px" : "180px" }}>
-              <img src={room.img} alt={room.name} className="w-full h-full object-cover" style={{ filter: "saturate(0.85)" }} />
+              <img src={img(room.img)} alt={room.name} className="w-full h-full object-cover" style={{ filter: "saturate(0.85)" }} />
               <div className="absolute top-3 right-3 flex items-center gap-1 rounded-full px-2.5 py-1 backdrop-blur-sm" style={{ background: "rgba(10,6,3,0.55)" }}>
                 <Star size={10} fill="#A8673A" color="#A8673A" /><span style={{ fontSize: "11px", color: "#F4F0EA", fontWeight: 600 }}>{room.rating}</span>
               </div>

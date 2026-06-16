@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
+import { img } from "@/lib/img";
 
 type UserType = "A" | "B" | null;
 
@@ -17,7 +18,7 @@ export function HomePage({ onSelectUser, selectedUser, onNavigate }: HomePagePro
     <div className="relative w-full h-full overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="/hero-poster.png"
+          src={img("/hero-poster.png")}
           alt="麻黄梁艺术家酒店"
           className="w-full h-full object-cover"
           style={{ filter: "brightness(1.05) contrast(1.05)" }}
